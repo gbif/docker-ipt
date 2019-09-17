@@ -1,19 +1,13 @@
-FROM tomcat:8.5-jre8-alpine
+FROM tomcat:8.5-jdk8
 LABEL MAINTAINERS="Markus Döring <mdoering@gbif.org>, Matthew Blissett <mblissett@gbif.org>"
 
-ARG ipt_version
-ENV IPT_VERSION=${ipt_version}
-ENV IPT_DATA_DIR=/srv/ipt
+ARG IPT_VERSION
 
-RUN apk add --no-cache \
-    curl \
-    unzip \
-    coreutils \
-    && rm -rf /var/cache/apk/*
+ENV IPT_DATA_DIR=/srv/ipt
 
 RUN rm -Rf /usr/local/tomcat/webapps \
     && mkdir -p /usr/local/tomcat/webapps/ROOT \
-    && mkdir -p /srv/ipt \
+    && mkdir -p ${IPT_DATA_DIR} \
     && curl -LSsfo ipt.war https://repository.gbif.org/repository/releases/org/gbif/ipt/${IPT_VERSION}/ipt-${IPT_VERSION}.war \
     && unzip -d /usr/local/tomcat/webapps/ROOT ipt.war \
     && rm -f ipt.war

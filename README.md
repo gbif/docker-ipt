@@ -1,5 +1,9 @@
 # Docker IPT
 
+**The Docker scripts are now managed as part of the main IPT project; https://github.org/gbif/ipt**
+
+----
+
 A Docker image for the [GBIF IPT](https://www.gbif.org/ipt).
 Tomcat is exposed on port 8080 and the IPT runs as the ROOT application.
 
